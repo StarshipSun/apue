@@ -21,3 +21,11 @@ apue linux programming
 lin% cat data        
 apue linux programming
 ```
+
+### 1.5.4.c
+```
+lin% gcc -o 1.5.4.out 1.5.4.c -lapue
+lin% ./1.5.4.out                    
+this is apue
+this is apue
+```
