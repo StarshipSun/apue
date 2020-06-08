@@ -59,3 +59,10 @@ lin% ./1.7.out
 EACCES: Permission denied
 ./1.7.out: No such file or directory
 ```
+
+### 1.8.2.c
+```
+lin% gcc -o 1.8.2.out 1.8.2.c -lapue 
+lin% ./1.8.2.out 
+uid = 1000, gid = 1000
+```
