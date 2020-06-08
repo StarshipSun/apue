@@ -51,3 +51,11 @@ lin      pts/1        2020-06-08 20:19 (:0)
 1.4.3.c  1.4.3.out  1.5.3.c  1.5.3.out  1.5.4.c  1.5.4.out  1.6.2.c  1.6.2.out  1.6.3.c  1.6.3.out  data  README.MD
 % %    
 ```
+
+### 1.7.c
+```
+lin% gcc -o 1.7.out 1.7.c -lapue
+lin% ./1.7.out 
+EACCES: Permission denied
+./1.7.out: No such file or directory
+```
