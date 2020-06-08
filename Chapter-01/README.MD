@@ -36,3 +36,18 @@ lin% gcc -o 1.6.2.out 1.6.2.c -lapue
 lin% ./1.6.2.out
 hello world from process ID 2025
 ```
+
+### 1.6.3.c
+```
+lin% gcc -o 1.6.3.out 1.6.3.c -lapue
+lin% ./1.6.3.out                    
+% who
+lin      tty1         2020-06-08 20:19 (:0)
+lin      pts/0        2020-06-08 20:19 (:0)
+lin      pts/1        2020-06-08 20:19 (:0)
+% pwd
+/home/lin/Desktop/apue/Chapter-01
+% ls
+1.4.3.c  1.4.3.out  1.5.3.c  1.5.3.out  1.5.4.c  1.5.4.out  1.6.2.c  1.6.2.out  1.6.3.c  1.6.3.out  data  README.MD
+% %    
+```
