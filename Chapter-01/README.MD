@@ -29,3 +29,10 @@ lin% ./1.5.4.out
 this is apue
 this is apue
 ```
+
+### 1.6.2.c
+```
+lin% gcc -o 1.6.2.out 1.6.2.c -lapue
+lin% ./1.6.2.out
+hello world from process ID 2025
+```
