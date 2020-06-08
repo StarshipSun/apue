@@ -66,3 +66,15 @@ lin% gcc -o 1.8.2.out 1.8.2.c -lapue
 lin% ./1.8.2.out 
 uid = 1000, gid = 1000
 ```
+
+### 1.9.c
+```
+lin% gcc -o 1.9.out 1.9.c -lapue
+lin% ./1.9.out                  
+% who
+lin      tty1         2020-06-08 20:19 (:0)
+lin      pts/0        2020-06-08 20:19 (:0)
+lin      pts/1        2020-06-08 20:19 (:0)
+% ^Cinterrupt
+% %     
+```
