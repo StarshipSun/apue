@@ -78,3 +78,38 @@ lin      pts/1        2020-06-08 20:19 (:0)
 % ^Cinterrupt
 % %     
 ```
+
+### 1.10
+```
+lin% time grep _POSIX_SOURCE */*.h > /dev/null 
+grep _POSIX_SOURCE */*.h > /dev/null  0.17s user 0.77s system 45% cpu 2.081 total
+```
+
+## 习题
+
+### P1.1 在系统上验证，除根目录外，目录.和..是不同的
+```
+lin% pwd
+/home/lin
+lin% ls -lia | grep \\.
+ 397374 drwx------ 19 lin  lin   4096 Jun  8 20:19 .
+ 393217 drwxr-xr-x  3 root root  4096 Aug 25  2019 ..
+```
+```
+# cd /
+# ls -lia | grep \\.
+2 drwxr-xr-x  17 root root       4096 Jun  6 15:09 .
+2 drwxr-xr-x  17 root root       4096 Jun  6 15:09 ..
+```
+-i 打印文件或目录的根节点，在根目录/下，目录.和..相同，其他目录下不同
+
+### P1.3 在1.7节中，perror的参数是用ISO C的属性const定义的，而strerror的整型参数没有用此属性定义，为什么？
+```
+# <stdio.h>
+void perror (const char *__s);
+
+# <string.h>
+char *strerror (int __errnum) __THROW;
+```
+perror的入参是字符串，const修饰表示不允许perror修改其指向字符。
+strerror的入参的整型，按值传递，strerror修改了也不会影响到函数的调用方，所以没必要加const。
