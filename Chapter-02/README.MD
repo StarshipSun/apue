@@ -76,3 +76,10 @@ SYMLINK_MAX = (no limit)
 no symbol for _POSIX_TIMESTAMP_RESOLUTION
 no symbol for _PC_TIMESTAMP_RESOLUTION
 ```
+
+### 2.5.5.2.c
+```
+lin% gcc -o 2.5.5.2.out 2.5.5.2.c -lapue
+lin% ./2.5.5.2.out                      
+open max: 8192
+```
