@@ -83,3 +83,23 @@ lin% gcc -o 2.5.5.2.out 2.5.5.2.c -lapue
 lin% ./2.5.5.2.out                      
 open max: 8192
 ```
+
+## 习题
+
+### P2.1 在2.8节中提到一些基本系统数据类型可以在多个头文件中定义。例如，在FreeBSD 8.0中，size_t在29个不同的头文件中都有定义。由于一个程序可能包含这29个不同的头文件，但是ISO C却不允许对同一名字进行多次typeof，那么如何编写这些头文件呢？
+```
+<sys/types.h>
+
+#ifndef __ssize_t_defined
+typedef __ssize_t ssize_t;
+# define __ssize_t_defined
+#endif
+```
+在sys/types.h中使用__ssize_t_defined来防止重复定义ssize_t
+
+### P2.3 改写[2.5.5.2.c](./2.5.5.2.c)程序，使其在sysconf为OPEN_MAX限制返回LONG_MAX时，避免进行不必要的处理
+```
+lin% gcc -o p2.3.out p2.3.c -lapue
+lin% ./p2.3.out 
+open max: 8192
+```
