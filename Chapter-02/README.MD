@@ -103,3 +103,4 @@ lin% gcc -o p2.3.out p2.3.c -lapue
 lin% ./p2.3.out 
 open max: 8192
 ```
+代码：[p2.3.c](./p2.3.c)
