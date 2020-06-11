@@ -60,9 +60,23 @@ read write
 ### [P3.2](./p3.2.c) 编写一个与3.12节中dup2功能相同的函数，要求不调用fcntl函数，并且要有正确的出错处理
 ```
 lin% gcc -o p3.2.out p3.2.c -lapue
-lin% ./p3.2.out                   
+lin% ./p3.2.out
 fd2:10 no open
-dup2 for stdin_fileno: 0, newfd: 10
+create fd:3
+create fd:4
+create fd:5
+create fd:6
+create fd:7
+create fd:8
+create fd:9
+close fd:3 success
+close fd:4 success
+close fd:5 success
+close fd:6 success
+close fd:7 success
+close fd:8 success
+close fd:9 success
+my_dup2 stdin_fileno: 0, newfd: 10
 ```
 
 ### P3.4 许多程序中都包含下面一段代码：
