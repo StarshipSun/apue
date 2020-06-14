@@ -27,3 +27,9 @@ lin% od -c file.hole
 0040000   A   B   C   D   E   F   G   H   I   J
 0040012
 ```
+
+### 3.9.c
+```
+lin% gcc -o 3.9.out 3.9.c -lapue 
+lin% ./3.9.out < file.hole > file
+```
