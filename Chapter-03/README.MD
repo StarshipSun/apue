@@ -33,3 +33,21 @@ lin% od -c file.hole
 lin% gcc -o 3.9.out 3.9.c -lapue 
 lin% ./3.9.out < file.hole > file
 ```
+
+### 3.14.1.c
+```
+lin% gcc -o 3.14.1.out 3.14.1.c -lapue
+lin% ./3.14.1.out 0
+read write
+lin% ./3.14.1.out 1
+read write
+lin% ./3.14.1.out 0 < /dev/tty
+read only
+lin% ./3.14.1.out 1 > temp.foo 
+lin% cat temp.foo
+write only
+lin% ./3.14.1.out 2 2>>temp.foo
+write only, append
+lin% ./3.14.1.out 5 5<>temp.foo
+read write
+```
