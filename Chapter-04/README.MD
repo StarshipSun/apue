@@ -1,4 +1,4 @@
-# 第四章 文件类型
+# 第四章 文件和目录
 
 ## 随书代码
 
@@ -137,4 +137,17 @@ lin% ls -lu changemod times
 lin% ls -lc changemod times
 -rw-r--r-- 1 lin lin 0 Jun 21 21:50 changemod
 -rw-r--r-- 1 lin lin 0 Jun 21 21:50 times
+```
+
+### 4.21.c
+```
+lin% gcc -o 4.21.out 4.21.c -lapue
+lin% ./4.21.out /home/lin/Desktop/apue 
+regular files  =     248, 63.59 %
+directories    =     141, 36.15 %
+block special  =       0,  0.00 %
+char special   =       0,  0.00 %
+FIFOs          =       0,  0.00 %
+symbolic links =       1,  0.26 %
+sockets        =       0,  0.00 %
 ```
