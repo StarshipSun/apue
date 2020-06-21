@@ -42,3 +42,17 @@ lin% ./4.7.out /etc/shadow
 access error for /etc/shadow: Permission denied
 open for reading OK
 ```
+
+### 4.8.c
+```
+lin% gcc -o 4.8.out 4.8.c -lapue
+lin% 
+lin% umask
+022
+lin% ./4.8.out 
+lin% ls -l foo bar
+-rw------- 1 lin lin 0 Jun 21 10:55 bar
+-rw-rw-rw- 1 lin lin 0 Jun 21 10:55 foo
+lin% umask
+022
+```
