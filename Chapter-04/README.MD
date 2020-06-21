@@ -109,3 +109,32 @@ cat: myfile: 没有那个文件或目录
 lin% ls -l myfile
 lrwxrwxrwx 1 lin lin 13 Jun 21 17:23 myfile -> /no/such/file
 ```
+
+### 4.20.c
+```
+lin% gcc -o 4.20.out 4.20.c -lapue 
+lin% ls -l changemod times 
+-rw-r--r-- 1 lin lin  96 Jun 21 21:49 changemod
+-rw-r--r-- 1 lin lin 104 Jun 21 21:49 times
+lin% ls -lu changemod times 
+-rw-r--r-- 1 lin lin  96 Jun 21 21:49 changemod
+-rw-r--r-- 1 lin lin 104 Jun 21 21:49 times
+lin% ls -lc changemod times
+-rw-r--r-- 1 lin lin  96 Jun 21 21:49 changemod
+-rw-r--r-- 1 lin lin 104 Jun 21 21:49 times
+lin% 
+lin% date
+Sun 21 Jun 2020 09:50:17 PM CST
+lin% 
+lin% ./4.20.out changemod times 
+lin% 
+lin% ls -l changemod times 
+-rw-r--r-- 1 lin lin 0 Jun 21 21:50 changemod
+-rw-r--r-- 1 lin lin 0 Jun 21 21:49 times
+lin% ls -lu changemod times
+-rw-r--r-- 1 lin lin 0 Jun 21 21:50 changemod
+-rw-r--r-- 1 lin lin 0 Jun 21 21:50 times
+lin% ls -lc changemod times
+-rw-r--r-- 1 lin lin 0 Jun 21 21:50 changemod
+-rw-r--r-- 1 lin lin 0 Jun 21 21:50 times
+```
