@@ -98,3 +98,14 @@ lin% df /home
 文件系统           1K-块     已用      可用 已用% 挂载点
 /dev/sdb       479670976 33262272 421972992    8% /
 ```
+
+### 4.17
+```
+lin% ln -s /no/such/file myfile
+lin% ls myfile
+myfile
+lin% cat myfile
+cat: myfile: 没有那个文件或目录
+lin% ls -l myfile
+lrwxrwxrwx 1 lin lin 13 Jun 21 17:23 myfile -> /no/such/file
+```
