@@ -56,3 +56,17 @@ lin% ls -l foo bar
 lin% umask
 022
 ```
+
+### 4.9.c
+```
+lin% ls -l foo bar
+-rw------- 1 lin lin 0 Jun 21 10:55 bar
+-rw-rw-rw- 1 lin lin 0 Jun 21 10:55 foo
+lin% 
+lin% gcc -o 4.9.out 4.9.c -lapue
+lin% ./4.9.out 
+lin% 
+lin% ls -l foo bar              
+-rw-r--r-- 1 lin lin 0 Jun 21 10:55 bar
+-rw-rwSrw- 1 lin lin 0 Jun 21 10:55 foo
+```
