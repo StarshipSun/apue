@@ -235,3 +235,17 @@ lin%
 lin% cat temp 
 cat: temp: 权限不够
 ```
+
+### P4.4 创建文件foo和bar后，运行[4.8.c](./4.8.c)的程序，将发生什么情况？
+```
+lin% ls -l bar foo 
+-rw-r--r-- 1 lin lin 4 Jun 22 22:24 bar
+-rw-rwSrw- 1 lin lin 4 Jun 22 22:24 foo
+lin% 
+lin% ./4.8.out 
+lin% 
+lin% ls -l bar foo
+-rw-r--r-- 1 lin lin 0 Jun 22 22:24 bar
+-rw-rwSrw- 1 lin lin 0 Jun 22 22:24 foo
+```
+文件被截断
