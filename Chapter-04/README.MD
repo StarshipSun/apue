@@ -253,3 +253,34 @@ lin% ls -l bar foo
 ### P4.5 4.12节中讲到一个普通文件的大小可以为0，同时我们又知道st_size字段是为目录或符号链接定义的，那么目录和符号链接的长度是否可以为0？
 目录的长度不能为0,因为它总是包含.和..目录
 符号链接的长度指的是其路径名包含的字符数，至少有一个字符，所以长度也不能为0
+
+### [P4.6](./p4.6.c) 编写一个类似cp(1)的程序，它复制包含空洞的文件，但不将字节0写到输出文件中去。
+```
+lin% ls -ls file.hole 
+8 -rw-r--r-- 1 lin lin 16394 Jun 22 23:04 file.hole
+lin% od -c file.hole 
+0000000   a   b   c   d   e   f   g   h   i   j  \0  \0  \0  \0  \0  \0
+0000020  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0040000   A   B   C   D   E   F   G   H   I   J
+0040012
+lin% 
+lin% gcc -o p4.6.out p4.6.c -lapue    
+lin% ./p4.6.out file.hole file.hole.cp
+lin%                                  
+lin% ls -ls file.hole file.hole.cp 
+8 -rw-r--r-- 1 lin lin 16394 Jun 22 23:04 file.hole
+8 -rwx------ 1 lin lin 16394 Jun 22 23:05 file.hole.cp
+lin% od -c file.hole
+0000000   a   b   c   d   e   f   g   h   i   j  \0  \0  \0  \0  \0  \0
+0000020  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0040000   A   B   C   D   E   F   G   H   I   J
+0040012
+lin% od -c file.hole.cp 
+0000000   a   b   c   d   e   f   g   h   i   j  \0  \0  \0  \0  \0  \0
+0000020  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0040000   A   B   C   D   E   F   G   H   I   J
+0040012
+```
