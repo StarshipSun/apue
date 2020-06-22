@@ -193,3 +193,45 @@ brw-rw---- 1 root disk 8, 16 Jun 22 19:35 /dev/sdb
 crw--w---- 1 root tty  4,  0 Jun 22 19:35 /dev/tty0
 crw--w---- 1 root tty  4,  1 Jun 22 19:35 /dev/tty1
 ```
+
+## 习题
+
+### [P4.1](./p4.1.c) 用stat函数替换[4.3.c](./4.3.c)程序中的lstat函数，如若命令行参数之一是符号链接，会发生什么变化？
+```
+lin% ./4.3.out /usr/spool 
+/usr/spool: symbolic link
+lin% 
+lin% gcc -o p4.1.out p4.1.c -lapue
+lin% ./p4.1.out /usr/spool 
+/usr/spool: directory
+```
+使用stat会跟随符号链接，得到的文件状态是符号链接指向文件的状态
+
+### P4.2 如果文件模式创建屏蔽字是777（八进制），结果会怎样？用shell的umask命令验证该结果。
+```
+lin% umask 777
+lin% umask 
+0777
+lin% touch temp
+lin% ls -l temp 
+---------- 1 lin lin 0 Jun 22 20:47 temp
+lin% 
+lin% cat temp 
+cat: temp: 权限不够
+```
+
+### P4.3 关闭一个你所拥有文件的用户读权限，将导致拒绝你访问自己的文件，对此进行验证。
+```
+lin% echo "abcd" >> temp
+lin% ls -l temp 
+-rw-r--r-- 1 lin lin 5 Jun 22 20:49 temp
+lin% cat temp 
+abcd
+lin% 
+lin% chmod u-r temp 
+lin% ls -l temp
+--w-r--r-- 1 lin lin 5 Jun 22 20:49 temp
+lin%    
+lin% cat temp 
+cat: temp: 权限不够
+```
