@@ -162,3 +162,13 @@ chdir to /tmp succeeded
 lin% pwd
 /home/lin/Desktop/apue/Chapter-04
 ```
+
+### 4.23.1.c
+```
+lin% sudo ln -s /var/spool /usr/spool
+lin% gcc -o 4.23.1.out 4.23.1.c -lapue
+lin% ./4.23.1.out 
+cwd = /var/spool/mail
+lin% ls -l /usr/spool 
+lrwxrwxrwx 1 root root 10 Jun 22 19:58 /usr/spool -> /var/spool
+```
