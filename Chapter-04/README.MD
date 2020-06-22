@@ -139,15 +139,15 @@ lin% ls -lc changemod times
 -rw-r--r-- 1 lin lin 0 Jun 21 21:50 times
 ```
 
-### 4.21.c
+### 4.22.c
 ```
-lin% gcc -o 4.21.out 4.21.c -lapue
-lin% ./4.21.out /home/lin/Desktop/apue 
-regular files  =     248, 63.59 %
-directories    =     141, 36.15 %
+lin% gcc -o 4.22.out 4.22.c -lapue
+lin% ./4.22.out /home/lin/Desktop/apue 
+regular files  =     254, 63.66 %
+directories    =     144, 36.09 %
 block special  =       0,  0.00 %
 char special   =       0,  0.00 %
 FIFOs          =       0,  0.00 %
-symbolic links =       1,  0.26 %
+symbolic links =       1,  0.25 %
 sockets        =       0,  0.00 %
 ```
