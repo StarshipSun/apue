@@ -151,3 +151,14 @@ FIFOs          =       0,  0.00 %
 symbolic links =       1,  0.25 %
 sockets        =       0,  0.00 %
 ```
+
+### 4.23.c
+```
+lin% gcc -o 4.23.out 4.23.c -lapue
+lin% pwd
+/home/lin/Desktop/apue/Chapter-04
+lin% ./4.23.out 
+chdir to /tmp succeeded
+lin% pwd
+/home/lin/Desktop/apue/Chapter-04
+```
