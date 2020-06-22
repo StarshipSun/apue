@@ -172,3 +172,24 @@ cwd = /var/spool/mail
 lin% ls -l /usr/spool 
 lrwxrwxrwx 1 root root 10 Jun 22 19:58 /usr/spool -> /var/spool
 ```
+
+### 4.24.c
+```
+lin% gcc -o 4.24.out 4.24.c -lapue
+
+lin% ./4.24.out / /home/lin /dev/tty[01]
+/: dev = 8/16
+/home/lin: dev = 8/16
+/dev/tty0: dev = 0/5 (character) rdev = 4/0
+/dev/tty1: dev = 0/5 (character) rdev = 4/1
+
+lin% mount
+...
+/dev/sdb on / type ext4 (rw,relatime)
+...
+
+lin% ls -l /dev/tty[01] /dev/sdb 
+brw-rw---- 1 root disk 8, 16 Jun 22 19:35 /dev/sdb
+crw--w---- 1 root tty  4,  0 Jun 22 19:35 /dev/tty0
+crw--w---- 1 root tty  4,  1 Jun 22 19:35 /dev/tty1
+```
