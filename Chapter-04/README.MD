@@ -284,3 +284,5 @@ lin% od -c file.hole.cp
 0040000   A   B   C   D   E   F   G   H   I   J
 0040012
 ```
+
+### P4.7 在4.12节ls命令的输出中，core和core.copy的访问权限不同，如果创建两个文件时umask没有变，说明为什么会出现这种差别。
