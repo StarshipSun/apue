@@ -113,30 +113,30 @@ lrwxrwxrwx 1 lin lin 13 Jun 21 17:23 myfile -> /no/such/file
 ### 4.20.c
 ```
 lin% gcc -o 4.20.out 4.20.c -lapue 
-lin% ls -l changemod times 
--rw-r--r-- 1 lin lin  96 Jun 21 21:49 changemod
--rw-r--r-- 1 lin lin 104 Jun 21 21:49 times
+lin% ls -l changemod times
+-rw-rw-r--. 1 lin lin 0 6月  20 04:45 changemod
+-rw-rw-r--. 1 lin lin 0 6月  20 04:45 times 
 lin% ls -lu changemod times 
--rw-r--r-- 1 lin lin  96 Jun 21 21:49 changemod
--rw-r--r-- 1 lin lin 104 Jun 21 21:49 times
+-rw-rw-r--. 1 lin lin 0 6月  20 04:45 changemod
+-rw-rw-r--. 1 lin lin 0 6月  20 04:45 times
 lin% ls -lc changemod times
--rw-r--r-- 1 lin lin  96 Jun 21 21:49 changemod
--rw-r--r-- 1 lin lin 104 Jun 21 21:49 times
+-rw-rw-r--. 1 lin lin 0 6月  20 04:45 changemod
+-rw-rw-r--. 1 lin lin 0 6月  20 04:45 times
 lin% 
 lin% date
-Sun 21 Jun 2020 09:50:17 PM CST
+2020年 06月 20日 星期六 04:48:19 CST
 lin% 
 lin% ./4.20.out changemod times 
 lin% 
 lin% ls -l changemod times 
--rw-r--r-- 1 lin lin 0 Jun 21 21:50 changemod
--rw-r--r-- 1 lin lin 0 Jun 21 21:49 times
+-rw-rw-r--. 1 lin lin 0 6月  20 04:48 changemod
+-rw-rw-r--. 1 lin lin 0 6月  20 04:45 times
 lin% ls -lu changemod times
--rw-r--r-- 1 lin lin 0 Jun 21 21:50 changemod
--rw-r--r-- 1 lin lin 0 Jun 21 21:50 times
+-rw-rw-r--. 1 lin lin 0 6月  20 04:45 changemod
+-rw-rw-r--. 1 lin lin 0 6月  20 04:45 times
 lin% ls -lc changemod times
--rw-r--r-- 1 lin lin 0 Jun 21 21:50 changemod
--rw-r--r-- 1 lin lin 0 Jun 21 21:50 times
+-rw-rw-r--. 1 lin lin 0 6月  20 04:48 changemod
+-rw-rw-r--. 1 lin lin 0 6月  20 04:48 times
 ```
 
 ### 4.22.c
