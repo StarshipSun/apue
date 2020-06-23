@@ -310,3 +310,7 @@ lin% cat temp > temp.cpy2
 lin% ls -l temp.cpy2
 -rw-rw-rw- 1 lin lin 0 Jun 23 20:15 temp.cpy2
 ```
+
+### P4.8 在运行[4.15.c](./4.15.c)的程序时，使用了df(1)命令来检查空闲的磁盘空间。为什么不使用du(1)命令？
+du命令需要文件名，如 du tempfile。
+只有当unlink函数返回时才释放tempfile的目录项，du . 命令没有计算仍然被tempfile占用的空间。所以只能使用df命令查看文件系统中实际可用的空闲空间。
