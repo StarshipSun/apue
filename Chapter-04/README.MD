@@ -314,3 +314,34 @@ lin% ls -l temp.cpy2
 ### P4.8 在运行[4.15.c](./4.15.c)的程序时，使用了df(1)命令来检查空闲的磁盘空间。为什么不使用du(1)命令？
 du命令需要文件名，如 du tempfile。
 只有当unlink函数返回时才释放tempfile的目录项，du . 命令没有计算仍然被tempfile占用的空间。所以只能使用df命令查看文件系统中实际可用的空闲空间。
+
+### P4.9 图4-20中显示unlink函数会修改文件状态更改时间，这是怎样发生的？
+unlink将文件的i节点的硬连接数减1
+
+### P4.10 4.22节中，系统对可打开文件数的限制对myftw函数会产生什么影响？
+可打开的文件数影响遍历文件系统的深度
+
+### [P4.11](./p4.11.c) 在4.22节中的myftw从不改变其目录，对这种处理方法进行改动：每次遇到一个目录就用其调用chdir，这样每次调用lstat时就可以使用文件名而非路径名，处理完所有的目录项后执行chdir("..")。比较这种版本的程序和书中程序的运行时间。
+```
+lin% gcc -o p4.11.out p4.11.c -lapue 
+
+lin% time ./p4.11.out /home/lin                  
+regular files  =   24447, 86.81 %
+directories    =    3498, 12.42 %
+block special  =       0,  0.00 %
+char special   =       0,  0.00 %
+FIFOs          =       0,  0.00 %
+symbolic links =     215,  0.76 %
+sockets        =       0,  0.00 %
+./p4.11.out /home/lin  0.03s user 0.05s system 99% cpu 0.079 total
+lin% 
+lin% time ./4.22.out /home/lin 
+regular files  =   24447, 86.81 %
+directories    =    3498, 12.42 %
+block special  =       0,  0.00 %
+char special   =       0,  0.00 %
+FIFOs          =       0,  0.00 %
+symbolic links =     215,  0.76 %
+sockets        =       0,  0.00 %
+./4.22.out /home/lin  0.02s user 0.07s system 99% cpu 0.084 total
+```
