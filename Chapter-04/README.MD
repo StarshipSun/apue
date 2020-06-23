@@ -286,3 +286,27 @@ lin% od -c file.hole.cp
 ```
 
 ### P4.7 在4.12节ls命令的输出中，core和core.copy的访问权限不同，如果创建两个文件时umask没有变，说明为什么会出现这种差别。
+1、更改进程的文件模式创建屏蔽字并不影响其父进程的屏蔽字。
+2、core文件的创建是3.6节中程序调用系统调用时创建的，传入的文件访问权限是FILE_MODE，
+即rw-r--r--。使用shell的cat命令对新文件也有一个默认的访问权限，为rw-rw-rw-,它会收到当前umask的影响。
+```
+#include "apue.h"
+#define	FILE_MODE	(S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
+```
+
+```
+lin% touch temp
+
+lin% umask
+022
+lin% cat temp > temp.cpy
+lin% ls -l temp.cpy
+-rw-r--r-- 1 lin lin 0 Jun 23 20:12 temp.cpy
+
+lin% umask 0
+lin% umask 
+000
+lin% cat temp > temp.cpy2
+lin% ls -l temp.cpy2
+-rw-rw-rw- 1 lin lin 0 Jun 23 20:15 temp.cpy2
+```
