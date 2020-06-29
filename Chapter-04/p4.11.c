@@ -50,16 +50,30 @@ main(int argc, char *argv[])
 #define	FTW_DNR	3		/* directory that can't be read */
 #define	FTW_NS	4		/* file that we can't stat */
 
-// static char	*fullpath;		/* contains full pathname for every file */
-// static size_t pathlen;
+static char	*fullpath;		/* contains full pathname for current working directory */
+static size_t pathlen;
+static char *tempath;		/* contains full pathname for every file*/
 
 static int					/* we return whatever func() returns */
 myftw(char *pathname, Myfunc *func)
 {
+	tempath = path_alloc(&pathlen);
+	fullpath = path_alloc(&pathlen);
+	/* contains cwd */
+	if (getcwd(fullpath, pathlen) == NULL) {
+		err_sys("getcwd error");
+	}
+
     if (chdir(pathname) < 0) {
         err_sys("chdir error for %s", pathname);
     }
-    return dopath(func, ".");
+    int ret = dopath(func, ".");
+
+	/* swtich to cwd */
+	if (chdir(fullpath) < 0) {
+		err_sys("chdir error for %s", fullpath);
+	}
+	return ret;
 }
 
 /*
@@ -89,8 +103,16 @@ dopath(Myfunc* func, char *pathname)
 	if ((ret = func(pathname, &statbuf, FTW_D)) != 0)
 		return(ret);
 
+	if (getcwd(tempath, pathlen) == NULL) {
+		err_sys("getcwd error");
+	}
+
     if (chdir(pathname) < 0) {
-        err_sys("chdir error for %s", pathname);
+		if (strlen(pathname) == 1 && pathname[0] == '.') {
+			err_sys("chdir error for %s", tempath);
+		} else {
+			err_sys("chdir error for %s/%s", tempath, pathname);
+		}
     }
 
 	if ((dp = opendir(".")) == NULL)	/* can't read directory */
@@ -106,11 +128,22 @@ dopath(Myfunc* func, char *pathname)
 			break;	/* time to leave */
 	}
 
-	if (closedir(dp) < 0)
-		err_ret("can't close directory %s", pathname);
+	if (closedir(dp) < 0) {
+		if (strlen(pathname) == 1 && pathname[0] == '.') {
+			err_sys("can't close directory %s", tempath);
+		}
+		else {
+			err_sys("can't close directory %s/%s", tempath, pathname);
+		}
+	}
 
     if (chdir("..") < 0) {
-        err_sys("chdir .. error for %s", pathname);
+		if (strlen(pathname) == 1 && pathname[0] == '.') {
+			err_sys("chdir .. error for %s", tempath);
+		}
+		else {
+			err_sys("chdir .. error for %s/%s", tempath, pathname);
+		}
     }
 	return(ret);
 }
