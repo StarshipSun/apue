@@ -387,10 +387,11 @@ PATH_MAX: 4096
 当叶节点的绝对路径名的长度大于系统的PATH_MAX限制时，调用getcwd会失败，但是目录的深度没有限制，依然可以调用chdir。
 
 ```
-	// char *fullpath = path_alloc(&pathlen);
+# 修改以下代码
+// char *fullpath = path_alloc(&pathlen);
 
-	pathlen = 60000;
-	char fullpath[pathlen];
+pathlen = 60000;
+char fullpath[pathlen];
 
 lin% gcc -o p4.16.out  p4.16.c -lapue
 lin% ./p4.16.out
@@ -445,3 +446,20 @@ if ((fd = creat(path, FILE_MODE)) < 0)
     err_sys("...");
 ```
 ### 如果path是/dev/fd/1，会出现什么情况。
+
+```
+lin% ll /dev/fd
+lrwxrwxrwx. 1 root root 13 6月   8 08:52 /dev/fd -> /proc/self/fd
+
+lin% stat /proc/self/fd
+  文件："/proc/self/fd"
+  大小：0               块：0          IO 块：1024   目录
+设备：3h/3d     Inode：400496      硬链接：2
+权限：(0500/dr-x------)  Uid：( 1000/     lin)   Gid：( 1000/     lin)
+环境：unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+最近访问：2020-06-30 11:15:35.769085655 +0800
+最近更改：2020-06-30 11:15:35.769085655 +0800
+最近改动：2020-06-30 11:15:35.769085655 +0800
+创建时间：-
+```
+unlink会失败，因为/proc/self/fd关闭了其他用户的写权限，防止普通用户删除目录中的文件
