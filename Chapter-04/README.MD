@@ -387,6 +387,25 @@ PATH_MAX: 4096
 当叶节点的绝对路径名的长度大于系统的PATH_MAX限制时，调用getcwd会失败，但是目录的深度没有限制，依然可以调用chdir。
 
 ```
+	// char *fullpath = path_alloc(&pathlen);
+
+	pathlen = 60000;
+	char fullpath[pathlen];
+
+lin% gcc -o p4.16.out  p4.16.c -lapue
+lin% ./p4.16.out
+PATH_MAX: 60000
+  0 getcwd success
+  1 getcwd success
+......
+......
+......
+998 getcwd success
+999 getcwd success
+```
+当路径名存储空间足够大的时候，getcwd会成功（Linux系统）
+
+```
 # 归档
 lin% tar -cf test.tar alonglonglonglonglonglonglonglonglonglonglonglongname
 

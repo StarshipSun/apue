@@ -2,13 +2,16 @@
 #include <dirent.h>
 #include <limits.h>
 
-static char	*fullpath;
-static size_t pathlen;
-
 int
 main(int argc, char *argv[])
 {
-	fullpath = path_alloc(&pathlen);
+	size_t pathlen;
+
+	// char *fullpath = path_alloc(&pathlen);
+	
+	pathlen = 60000;
+	char fullpath[pathlen];
+
 	printf("PATH_MAX: %d\n", pathlen);
 
 	char *dirname = "alonglonglonglonglonglonglonglonglonglonglonglongname";
