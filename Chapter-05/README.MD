@@ -78,11 +78,24 @@ mkstemp 函数会修改 template 字符串的占位符。第一个模板使用�
 ```
 lin% gcc -o p5.1.out p5.1.c -lapue
 lin% ./p5.1.out
+stream = stdin, fully buffered, buffer size = 8192
+stream = stdin, unbuffered, buffer size = 1
 my_setbuf success: stdin
+stream = stdout, fully buffered, buffer size = 8192
+stream = stdout, unbuffered, buffer size = 1
 my_setbuf success: stdout
+stream = stderr, fully buffered, buffer size = 8192
+stream = stderr, unbuffered, buffer size = 1
 my_setbuf success: stderr
+stream = /etc/passwd, fully buffered, buffer size = 8192
+stream = /etc/passwd, unbuffered, buffer size = 1
 my_setbuf success: /etc/passwd
 ```
+setbuf(stream, buf) 等价于 setvbuf(stream, buf, buf ? _IOFBF : _IONBF, BUFSIZ)
+<br>
+如果 buf 不为 NULL，buf 应当指向一个长度至少为 BUFSIZ 字节的缓冲，setbuf 将流设置为全缓冲。
+<br>
+如果 buf 为 NULL，setbuf 将流设置为不带缓冲
 
 ### P5.2 图 5-5 中的程序利用每次一行 I/O （fgets 和 fputs 函数）复制文件。若将程序中的 MAXLINE 改为 4 ，当复制的行超过该最大值时会出现什么情况？请对此进行解释
 
