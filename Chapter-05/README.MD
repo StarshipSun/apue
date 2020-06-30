@@ -74,7 +74,15 @@ mkstemp 函数会修改 template 字符串的占位符。第一个模板使用�
 
 ## 习题
 
-### P5.1 用 setvbuf 实现 setbuf
+### [P5.1](./p5.1.c) 用 setvbuf 实现 setbuf
+```
+lin% gcc -o p5.1.out p5.1.c -lapue
+lin% ./p5.1.out
+my_setbuf success: stdin
+my_setbuf success: stdout
+my_setbuf success: stderr
+my_setbuf success: /etc/passwd
+```
 
 ### P5.2 图 5-5 中的程序利用每次一行 I/O （fgets 和 fputs 函数）复制文件。若将程序中的 MAXLINE 改为 4 ，当复制的行超过该最大值时会出现什么情况？请对此进行解释
 
