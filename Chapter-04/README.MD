@@ -387,9 +387,37 @@ PATH_MAX: 4096
 当叶节点的绝对路径名的长度大于系统的PATH_MAX限制时，调用getcwd会失败，但是目录的深度没有限制，依然可以调用chdir。
 
 ```
-tar -cf test.tar alonglonglonglonglonglonglonglonglonglonglonglongname
+# 归档
+lin% tar -cf test.tar alonglonglonglonglonglonglonglonglonglonglonglongname
+
+# 查看归档内容，可以正常显示
+lin% tar -tvf test.tar
+......
+drwxrw---- lin/lin           0 2020-06-30 10:04 alonglonglonglonglonglonglonglonglonglonglonglongname/....../alonglonglonglonglonglonglonglonglonglonglonglongname/
+
+# 提取归档文件
+lin% tar -xvf test.tar
+tar: alonglonglonglong......longlonglonglonglongname：无法 mkdir: 文件名过长
+tar: 由于前次错误，将以上次的错误状态退出
 ```
-对目录可以使用tar命令归档
+对目录可以使用tar命令归档，但是提取时将发生错误
+
+
+```
+# 归档
+lin% echo "./alonglonglonglonglonglonglonglonglonglonglonglongname/" | cpio -ov -F test.cpio
+./alonglonglonglonglonglonglonglonglonglonglonglongname/
+1 块
+
+# 查看归档内容
+lin% cpio -t < test.cpio
+cpio: 归档非正常终止
+
+# 提取归档文件
+lin% cpio -i < test.cpio
+cpio: 归档非正常终止
+```
+对目录可以使用cpio命令归档会发生错误
 
 ### P4.17 3.16节中描述了/dev/fd特征。如果每个用户都可以访问这些文件，则其访问权限必须为 rw-rw-rw- 。有些程序创建输出文件时，先删除该文件以确保该文件名不存在，忽略返回值。
 ```
