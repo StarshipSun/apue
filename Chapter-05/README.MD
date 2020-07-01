@@ -58,3 +58,15 @@ lin% ./5.13.out
 /tmp/fileb6lkCR
 one line of output
 ```
+
+### 5.13.1.c
+```
+lin% gcc -o 5.13.1.out 5.13.1.c -lapue
+lin% ./5.13.1.out 
+trying to create first temp file...
+temp name = /tmp/dirMFAS3f
+file exist
+trying to create second temp file...
+zsh: segmentation fault (core dumped)  ./5.13.1.out
+```
+mkstemp函数会修改template字符串的占位符。第一个模板使用了数组，字符串空间是在栈上分配的。第二种情况使用的是指针，只有指针自身驻留在栈上，编译器把字符串存放在可执行文件的只读段，mkstemp函数试图修改字符串时，出现了段错误（segment fault）。
