@@ -47,3 +47,14 @@ stream = /etc/passwd, fully buffered, buffer size = 4096
 标准错误是不带缓冲的，以便错误信息能够及时显示。
 <br>
 磁盘文件默认是全缓冲的，缓冲区为4096字节。
+
+### 5.13.c
+```
+lin% gcc -o 5.13.out 5.13.c -lapue
+/usr/bin/ld: /tmp/ccyY5cXu.o: in function `main':
+5.13.c:(.text+0x20): 警告：the use of `tmpnam' is dangerous, better use `mkstemp'
+lin% ./5.13.out 
+/tmp/filef2N6BO
+/tmp/fileb6lkCR
+one line of output
+```
