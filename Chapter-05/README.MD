@@ -84,7 +84,7 @@ len of string in buf = 24
 after fclose: hello, worldcccccccccccccccccccccccccccccccccc
 len of string in buf = 46
 ```
-调用 fflush 或者 fseek 后会主动追加写入NULL字节
+调用 fflush 或者 fseek 后会主动追加写入 NULL 字节
 
 ## 习题
 
@@ -111,14 +111,42 @@ setbuf(stream, buf) 等价于 setvbuf(stream, buf, buf ? _IOFBF : _IONBF, BUFSIZ
 <br>
 如果 buf 为 NULL，setbuf 将流设置为不带缓冲
 
-### P5.2 图 5-5 中的程序利用每次一行 I/O （fgets 和 fputs 函数）复制文件。若将程序中的 MAXLINE 改为 4 ，当复制的行超过该最大值时会出现什么情况？请对此进行解释
+### P5.2 图 [5-5](./5.8.1.c) 中的程序利用每次一行 I/O （fgets 和 fputs 函数）复制文件。若将程序中的 MAXLINE 改为 4 ，当复制的行超过该最大值时会出现什么情况？请对此进行解释
+```
+lin% gcc -o p5.2.out p5.2.c -lapue
+lin% ./p5.2.out 
+fu2222adyh324hsdfsds
+fu2222adyh324hsdfsds
+```
+这两个函数仍然能够工作。
+<br>
+fgets 函数读入数据，直到行结束或者缓冲区满，最后留一个字节存放终止 NULL 字节。
+<br>
+fputs 只负责将缓冲区的内容输出直到遇到一个 NULL 字节
 
 ### P5.3 printf 返回 0 值表示什么？
+表示printf没有输出任何字符
 
 ### P5.4 下面的代码在一些机器上运行正确，而在另外一些机器运行时出错，解释原因所在
+```
+#include <stdio.h>
+
+int main(void)
+{
+    char c;
+    while ((c = getchar()) != EOF) {
+        putchar(c);
+    }
+}
+```
+getchar 函数返回的是 int 类型，而不是 char 类型。EOF 经常被定义为 -1，如果系统使用的是无符号字符类型，那么返回的 EOF 被保存到字符 c 后将不再是 -1, 所以程序会进入死循环。
 
 ### P5.5 对标准 I/O 流如何使用 fsync 函数（见 3.13 节）？
+先调用 fflush 后调用 fileno 获取标准 I/O 对应的文件描述符作为 fsync 的入参。
+<br>
+如果不调用 fflush，所有数据仍然在内存缓冲区中，此时调用 fsync 将没有任何效果。
 
 ### P5.6 在图 1-7 和图 1-10 程序中，打印的提示信息没有包含换行符，程序也没有调用 fflush 函数，请解释输出提示信息的原因是什么。
+当程序交互运行时，标准输入和标准输出均为行缓冲方式。每次调用fgets时标准输出设备将自动冲洗。
 
 ### P5.7 基于 BSD 的系统提供了 funopen 的函数调用使我们可以拦截读、写、定位以及关闭一个流的调用。使用这个函数为 FreeBSD 和 MacOS X 实现 fmemopen。
