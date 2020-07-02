@@ -71,6 +71,20 @@ zsh: segmentation fault (core dumped)  ./5.13.1.out
 ```
 mkstemp 函数会修改 template 字符串的占位符。第一个模板使用了数组，字符串空间是在栈上分配的。第二种情况使用的是指针，只有指针自身驻留在栈上，编译器把字符串存放在可执行文件的只读段，mkstemp 函数试图修改字符串时，出现了段错误（segment fault）。
 
+### 5.14.c
+```
+lin% gcc -o 5.14.out 5.14.c -lapue
+lin% ./5.14.out 
+initial buffer contents: 
+before flush: 
+after flush: hello, world
+len of string in buf = 12
+after fseek: bbbbbbbbbbbbhello, world
+len of string in buf = 24
+after fclose: hello, worldcccccccccccccccccccccccccccccccccc
+len of string in buf = 46
+```
+调用 fflush 或者 fseek 后会主动追加写入NULL字节
 
 ## 习题
 
