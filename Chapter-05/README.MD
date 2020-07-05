@@ -150,3 +150,4 @@ getchar 函数返回的是 int 类型，而不是 char 类型。EOF 经常被定
 当程序交互运行时，标准输入和标准输出均为行缓冲方式。每次调用fgets时标准输出设备将自动冲洗。
 
 ### P5.7 基于 BSD 的系统提供了 funopen 的函数调用使我们可以拦截读、写、定位以及关闭一个流的调用。使用这个函数为 FreeBSD 和 MacOS X 实现 fmemopen。
+运行环境是 Linux，没有 funopen 函数调用
