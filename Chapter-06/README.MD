@@ -48,7 +48,7 @@ Reserved: -1
 ### P6.2 假设你有超级用户权限，并且系统使用了阴影口令，重新考虑上一道习题。
 可以直接读取阴影文件或者调用读取阴影文件接口
 
-### P6.3 编写一程序，它调用 uname 并且输出 utsname 结构中的所有字段，将该输出与 uname 命令的输出结果进行比较。
+### [P6.3](./P6.3.c) 编写一程序，它调用 uname 并且输出 utsname 结构中的所有字段，将该输出与 uname 命令的输出结果进行比较。
 ```
 lin% gcc -o P6.3.out P6.3.c -lapue
 lin% ./P6.3.out
@@ -66,4 +66,16 @@ Linux localhost.localdomain 3.10.0-957.el7.x86_64 #1 SMP Thu Nov 8 23:39:32 UTC 
 ### P6.4 计算可由 time_t 数据类型表示的最近时间。如果超出了这一时间将会如何？
 根据系统不同 time_t 可能是 long int 或者 int 。如果是 int 存储的话，那么到 2038 年将达到上限，之后将会溢出，时间变成负数。
 
-### P6.5 编写一程序，获取当前时间，并使用 strftime 将输出结果转换为类似于 date 命令的默认输出。将环境变量 TZ 设置为不同值，观察输出结果。
+### [P6.5](./P6.5.c) 编写一程序，获取当前时间，并使用 strftime 将输出结果转换为类似于 date 命令的默认输出。将环境变量 TZ 设置为不同值，观察输出结果。
+```
+lin% gcc -o P6.5.out P6.5.c
+
+lin% TZ=Asia/Shanghai ./P6.5.out
+localtime: CST 2020/07/07 14:34:11 Tue
+
+lin% TZ=America/Adak ./P6.5.out
+localtime: HDT 2020/07/06 21:34:15 Mon
+
+lin% TZ=Africa/Abidjan ./P6.5.out
+localtime: GMT 2020/07/07 06:34:30 Tue
+```
