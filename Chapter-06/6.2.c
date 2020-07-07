@@ -19,7 +19,8 @@ getpwnam(const char *name)
 int main(int argc, char *argv[])
 {
     if (argc != 2) {
-        err_sys("usage: %s Username", argv[0]);
+        printf("usage: %s Username\n", argv[0]);
+	exit(1);
     }
 
     struct passwd *ptr = getpwnam(argv[1]);
