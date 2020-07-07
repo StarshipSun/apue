@@ -49,6 +49,19 @@ Reserved: -1
 可以直接读取阴影文件或者调用读取阴影文件接口
 
 ### P6.3 编写一程序，它调用 uname 并且输出 utsname 结构中的所有字段，将该输出与 uname 命令的输出结果进行比较。
+```
+lin% gcc -o P6.3.out P6.3.c -lapue
+lin% ./P6.3.out
+sysname: Linux
+nodename: localhost.localdomain
+release: 3.10.0-957.el7.x86_64
+version: #1 SMP Thu Nov 8 23:39:32 UTC 2018
+machine: x86_64
+__domainname: (none)
+
+lin% uname -a
+Linux localhost.localdomain 3.10.0-957.el7.x86_64 #1 SMP Thu Nov 8 23:39:32 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+```
 
 ### P6.4 计算可由 time_t 数据类型表示的最近时间。如果超出了这一时间将会如何？
 
