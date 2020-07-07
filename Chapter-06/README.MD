@@ -22,3 +22,32 @@ lin% ./6.10.out
 buffer length 16 is too small
 time and date: 09:42:45 AM, Tue Jul 07, 2020
 ```
+
+## 习题
+
+### [P6.1](./P6.1.c) 如果系统使用阴影文件，那么如何取得加密口令？
+```
+lin% gcc -o P6.1.out P6.1.c -lapue
+
+lin% ./P6.1.out lin
+Username no found or error: Permission denied
+
+root% ./P6.1.out lin
+Login name: lin
+Encrypted password: $6$1wLeiH8D1Ng5GgoP$AFv3Ozr//4NQscRn0vRrcLaejNhCgJHktm7jdRLZc76O4B5duCN96a2edNWTAe67fHm7fQpGT1lWtu9NGs6Wb1
+Date of last change: -1
+Min of days between changes: 0
+Max of days between changes: 99999
+of days before password expires to warn user to change it: 7
+of days after password expires until account is disabled: -1
+Date when account expires: -1
+Reserved: -1
+```
+
+### P6.2 假设你有超级用户权限，并且系统使用了阴影口令，重新考虑上一道习题。
+
+### P6.3 编写一程序，它调用 uname 并且输出 utsname 结构中的所有字段，将该输出与 uname 命令的输出结果进行比较。
+
+### P6.4 计算可由 time_t 数据类型表示的最近时间。如果超出了这一时间将会如何？
+
+### P6.5 编写一程序，获取当前时间，并使用 strftime 将输出结果转换为类似于 date 命令的默认输出。将环境变量 TZ 设置为不同值，观察输出结果。
