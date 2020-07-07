@@ -43,8 +43,10 @@ of days after password expires until account is disabled: -1
 Date when account expires: -1
 Reserved: -1
 ```
+使用访问阴影文件的接口，从数据结构 spwd 中获得加密口令。需要有超级用户权限。
 
 ### P6.2 假设你有超级用户权限，并且系统使用了阴影口令，重新考虑上一道习题。
+可以直接读取阴影文件或者调用读取阴影文件接口
 
 ### P6.3 编写一程序，它调用 uname 并且输出 utsname 结构中的所有字段，将该输出与 uname 命令的输出结果进行比较。
 
