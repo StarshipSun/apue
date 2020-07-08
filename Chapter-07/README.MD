@@ -32,3 +32,22 @@ after longjmp:
 globval = 95, autoval = 2, regival = 3, volaval = 98, statval = 99
 ```
 调用 longjmp 后，在 main 函数中，具有 volatile 属性的自动变量不会被回滚。全局变量或者静态变量的值在执行 longjmp 时也保持不变。
+
+### 7.11.c
+```
+lin% gcc -o 7.11.out 7.11.c -lapue
+lin% ./7.11.out 
+RLIMIT_AS       (infinite)  (infinite)
+RLIMIT_CORE     (infinite)  (infinite)
+RLIMIT_CPU      (infinite)  (infinite)
+RLIMIT_DATA     (infinite)  (infinite)
+RLIMIT_FSIZE    (infinite)  (infinite)
+RLIMIT_MEMLOCK       65536       65536
+RLIMIT_MSGQUEUE      819200      819200
+RLIMIT_NICE              0           0
+RLIMIT_NOFILE         8192      524288
+RLIMIT_NPROC         31548       31548
+RLIMIT_RSS      (infinite)  (infinite)
+RLIMIT_SIGPENDING       31548       31548
+RLIMIT_STACK       8388608  (infinite)
+```
