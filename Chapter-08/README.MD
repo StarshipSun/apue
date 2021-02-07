@@ -24,3 +24,22 @@ pid = 3930, glob = 6, var = 88
 * write 函数不带缓冲，所以调用 write 会马上输出
 * 标准 I/O 是带缓冲的，如果是连到终端设备是行缓冲，如果是文件则是全缓冲。
 * 当重定向标准输出到文件时，fork 之前调用了一次 printf，但是调用 fork 之后在数据仍然在缓冲区中，然后在将父进程数据空间复制到子进程中时，缓冲区数据也被复制到子进程中，调用 exit 之 flush 标准 I/O 导致数据出现两次。
+
+### 8.6.1.c
+```
+lin% gcc -o 8.6.1.out 8.6.1.c -lapue
+lin% ./8.6.1.out                    
+normal termination, exit status = 7
+abnormal termination, signal number = 6
+abnormal termination, signal number = 8
+```
+* 使用 pid_t wait(int *status) 函数等待子进程终止，只要有一个子进程终止，wait 就返回，否则阻塞。
+* 使用宏来判断进程的状态和获得进程的退出/终止信号。
+
+### 8.6.2.c
+```
+lin% gcc -o 8.6.2.out 8.6.2.c -lapue
+lin% ./8.6.2.out                    
+lin% second child, parent pid = 1
+```
+* 如果一个进程 fork 一个子进程，但不要它等待子进程终止，也不希望子进程处于僵死状态直到父进程终止，可以使用两次 fork 来实现
