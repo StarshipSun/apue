@@ -63,3 +63,19 @@ output from child: 1111111111111111111111111111
 
 ### 8.10.1.c
 exec并不创建新的进程，只是用磁盘上的一个新程序替换了当前进程的正文段、数据段、堆段和栈段
+
+[lin@lin Chapter-08]$ gcc -o echoall 8.10.1.c 
+[lin@lin Chapter-08]$ gcc -o 8.10.2.out 8.10.2.c -lapue
+[lin@lin Chapter-08]$ ./8.10.2.out 
+argv[0]: echoall
+argv[1]: myarg1
+argv[2]: My ARG2
+USER=unknown
+PATH=/tmp
+[lin@lin Chapter-08]$ argv[0]: echoall
+argv[1]: only 1 arg
+XDG_SESSION_ID=1
+...
+_=./8.10.2.out
+
+* shell 提示符出现在第二个 exec 打印 argv[0] 之前。这是因为父进程并不等待该子进程结束。
